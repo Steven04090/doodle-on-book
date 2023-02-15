@@ -1,0 +1,204 @@
+<!DOCTYPE html><html>
+<head>
+<title>中文課本</title>
+   <meta name="description" content="中文課本">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="Assets/image/favicon.png" type="image/x-icon">
+   <link rel="stylesheet" href="Assets/css/bootstrap.css">
+   <link rel="stylesheet" href="Assets/css/index.css">
+   <link rel="stylesheet" href="Assets/css/font-awesome.css">
+</head>
+<body>
+   <nav>
+      <button id="paintonButton" class="btn">
+         <svg width="48px" height="48px" viewBox="0 0 48 48">
+            <path d="M46.443,7.219C40.506,16.046,22.623,33.9,22.623,33.9l-0.007-0.008c-0.042,0.047-0.08,0.094-0.125,0.14c-1.124,1.122-2.649,1.575-4.114,1.403c0.471,1.972-0.026,4.137-1.529,5.678c0,0-7.52,9.299-15.854,3.439c0,0,4.494-1.259,4.885-4.885c0,0-0.6-3.654,2.699-7.04c1.479-1.519,3.548-2.039,5.445-1.596c-0.152-1.444,0.303-2.94,1.411-4.048c0.044-0.045,0.093-0.082,0.139-0.125l-0.007-0.008c0,0,17.872-17.864,26.711-23.792c1.171-0.837,2.805-0.739,3.854,0.31C47.186,4.42,47.282,6.051,46.443,7.219z M15.456,33.986c-0.742-0.742-1.704-1.166-2.733-1.166c-1.033,0-2.009,0.416-2.744,1.172c-2.535,2.602-2.155,5.584-2.145,5.677c-0.218,2.021-1.363,3.741-2.557,4.776c0.422,0.076,0.849,0.115,1.285,0.115c4.75,0,8.752-4.66,8.789-4.703C15.352,39.857,18.09,36.621,15.456,33.986z M15.994,30.508c0,0.797,0.289,1.547,0.854,2.109c0.565,0.564,1.348,0.891,2.146,0.891c0.798,0,1.519-0.326,2.066-0.874l1.554-1.569c0.079-0.082,0.187-0.191,0.274-0.28l-4.197-4.197c-0.092,0.089-0.205,0.198-0.287,0.279l-1.557,1.536C16.283,28.965,15.994,29.712,15.994,30.508z M44.721,4.786C44.471,4.537,44.18,4.5,44.027,4.5c-0.213,0-0.414,0.064-0.635,0.222c-6.219,4.17-18,15.367-23.302,20.502l4.159,4.159c5.141-5.296,16.363-17.083,20.568-23.332C45.102,5.658,45.061,5.125,44.721,4.786z"/>
+            </svg>
+         <span>圖畫模式</span>
+      </button>
+      <button id="watchButton" class="btn active">
+         <svg width="48px" height="48px" viewBox="-9 -9 48 48">
+            <path d="M31.042-7.65c-3.642,0-6.604,2.963-6.604,6.606h1.886c0-2.602,2.117-4.719,4.719-4.719c2.603,0,4.719,2.117,4.719,4.719v22.363c-1.88-2.676-4.982-4.432-8.494-4.432c-5.403,0-9.854,4.155-10.331,9.438h-3.871c-0.479-5.282-4.928-9.438-10.333-9.438c-3.511,0-6.614,1.756-8.494,4.432V-1.044c0-2.602,2.117-4.719,4.719-4.719c2.602,0,4.719,2.117,4.719,4.719h1.888c0-3.643-2.965-6.606-6.606-6.606c-3.642,0-6.606,2.963-6.606,6.606v28.313c0,5.725,4.657,10.382,10.381,10.382c5.405,0,9.854-4.155,10.333-9.438h3.871c0.479,5.282,4.928,9.438,10.333,9.438c5.725,0,10.382-4.657,10.382-10.382V-1.044C37.648-4.687,34.685-7.65,31.042-7.65z M2.73,35.763c-4.684,0-8.494-3.811-8.494-8.494s3.81-8.493,8.494-8.493c4.684,0,8.494,3.81,8.494,8.493S7.414,35.763,2.73,35.763z M27.267,35.763c-4.682,0-8.493-3.811-8.493-8.494s3.812-8.493,8.493-8.493c4.685,0,8.494,3.81,8.494,8.493S31.951,35.763,27.267,35.763z"/>
+         </svg>
+         <span>閱讀模式</span>
+      </button>
+   </nav>
+   <div id="canvas-content">
+      <canvas id="myCanvas"></canvas>
+      <div class="brush_tool">
+         <div class="setting_title">筆刷設定:</div>
+         <div style="padding:4px 12px;">
+           <div id="brushSize" class="d-flex">
+             <brush-size value="1"><div class="thin">細</div></brush-size>
+             <brush-size value="3" class="selected"><div class="normal">中</div></brush-size>
+             <brush-size value="5"><div class="bold">粗</div></brush-size>
+           </div>
+           <div id="brushStyle" class="d-flex">
+             <brush-style value="butt"><div class="butt"></div>刮刀</brush-style>
+             <brush-style value="round" class="selected"><div class="round"></div>圓形</brush-style>
+             <brush-style value="square"><div class="square"></div>方形</brush-style>
+           </div>
+         
+           <ul id="brushColor" class="color-picker">
+           <li class="black selected" value="black"></li>
+           <li class="red color" value="red"></li>
+           <li class="yellow" value="yellow"></li>
+           <li class="blue" value="blue"></li>
+           <li class="green" value="green"></li>
+           <li class="pink" value="pink"></li>
+         </ul>
+           <div id="else_tool">
+           <button id="prevButton" class="btn" title="復原"><i class="fa fa-reply" aria-hidden="true"></i></button>
+           <button id="nextButton" class="btn" title="重作"><i class="fa fa-share" aria-hidden="true"></i></button>
+           <button id="clearButton" class="btn" title="清除"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+           <button id="PaintLayerButton" class="btn" title="畫在後"><i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+       </button>
+         </div>
+         </div>
+       </div>
+    </div>
+    
+    
+   <div class="d-flex justify-content-center align-items-center flex-column" style="height:100vh;transform: scale(0.6);">
+      <div class="table-of-contents" style="display:none;">
+        <a href="#">序</a>
+        <a href="#">目錄</a>
+        <a href="#">徐志摩</a>
+        <a href="#">孔子</a>
+      </div>
+      <div class="d-flex justify-content-center align-items-center" style="">
+      <!--
+    <div class="bookmark">
+       <a class="next"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+        </a>
+      </div>
+    -->
+      <div class="book position-relative d-flex">
+        <div class="d-flex page cover_page">
+          <div class="cover w-100">
+            <div class="content-img" style="background-image:url('https://cdn.pixabay.com/photo/2016/01/02/16/06/girl-1118396_960_720.jpg');filter: none;background-position: center;"></div>
+          </div>
+          <div class="shadow"></div>
+        </div>
+        
+        <div class="d-flex page">
+          <div class="content front">
+            <div class="content-img" style="background-image:url('https://cdn.pixabay.com/photo/2019/03/20/03/39/draw-4067546_960_720.png');height: 40%;bottom: 0;top: unset;left: 43%;"></div>
+            <div class="article">
+            <h1 class="title d-flex justify-content-between align-items-end">
+            <div style="letter-spacing:20px;font-size:2.4rem;">老師沒教你的事</div>  
+            <div style="font-size:20px;">Wu</div>
+          </h1>
+            <h3 class="second_title">序</h3>
+            <span style="font-size:22px;">道可道，非常道。</span>
+            <div class="author_content"> 
+             <br>
+             &nbsp;<br>
+             讀書，你就能成為社會所想要的人，<br>
+             不讀書，你就能成為你想要成為的人。<br>
+             課本就是要拿來塗鴉跟畫畫，所以我現在變成我想要成為的人——躺平。<br>
+             如果大家都想跟我一樣躺平，那我是不是就要失業了。<br>
+             &nbsp;<br>
+             老師謝謝你，您的尊尊教誨我豈敢忘記，<br>
+             因為我從來都沒有記得過。
+             </div>
+           </div>
+          </div>
+          <div class="content back">
+          <div class="content-img" style="background-image:url('https://cdn.pixabay.com/photo/2019/04/10/11/56/watercolor-4116932_960_720.png');"></div>
+          <h1 class="title d-flex justify-content-between align-items-end">
+            <div style="letter-spacing:20px;font-size:2.4rem;">再別康橋</div>
+            <div style="font-size:20px;">徐志摩</div>
+          </h1>
+          <div class="article poem">
+            <div>輕輕的我走了</div>
+            <div>正如我輕輕的來</div>
+            <div>我輕輕的招手</div>
+            <div>作別西天的雲彩</div>
+            <div style="margin-right:25px;">那河畔的金柳</div>
+            <div>是夕陽中的新娘</div>
+            <div>波光裡的艷影</div>
+            <div>在我的心頭蕩漾</div>
+           </div>
+        </div>
+        </div>
+        <div class="d-flex page">
+         <div class="content front">
+          <h3 class="second_title">作 者</h3>
+           <div class="author d-flex">
+             <img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Xu_Zhimo.jpg/220px-Xu_Zhimo.jpg">
+             <div class="author_content py-2">
+               <div class="author_intro">徐志摩（西元1897年1月15日－西元1931年11月19日），原名章垿，字槱森，小字又申，後改名志摩，筆名南湖、雲中鶴等，浙江海寧人，中國著名的新月派現代詩人，散文家，亦是著名武俠小說作家金庸的表兄[2][3]。徐志摩出生於富裕家庭，並曾留學英國。一生追求「愛」、「自由」與「美」（胡適語），這為他帶來了不少創作靈感，亦斷送了他的一生。徐志摩倡導新詩格律，對中國新詩的發展做出了重要的貢獻。他與胡適、聞一多、梁實秋、陳源等人於1923年創建新的文學團體：新月詩社。</div>
+             </div>
+           </div>
+           
+           <h3 class="second_title">生 平</h3>
+           <div class="author_content">
+             1918年赴美國克拉克大學學習銀行學。畢業後，轉入紐約哥倫比亞大學的研究院，進經濟系。 1921年赴英國留學，入劍橋大學當特別生，研究政治經濟學。在劍橋兩年深受西方教育的薰陶及歐美浪漫主義和唯美派詩人的影響。奠定其浪漫主義詩風。1923年成立新月社。1931年11月19日因飛機失事罹難。代表作品有《再別康橋》、《翡冷翠的一夜》。
+           </div>
+        </div>
+        <div class="back"></div>
+      </div>
+        
+        <div class="d-flex page">
+          <div class="content front"></div>
+          <div class="content back">
+          <div class="content-img" style="background-image:url('https://cdn.pixabay.com/photo/2017/11/01/04/03/analects-2907066_960_720.jpg');"></div>
+          <h1 class="title d-flex justify-content-between align-items-end">
+            <div style="letter-spacing:20px;font-size:2.4rem;">論語 學而篇</div>
+            <div style="font-size:20px;">孔子</div>
+          </h1>
+          <div class="article poem">
+            <div>第一章</div>
+            <div>子曰：</div>
+            <div>學而時習之，不亦說乎？</div>
+            <div>有朋自遠方來，不亦樂乎？</div>
+            <div>人不知而不慍，不亦君子乎？</div>
+           </div>
+        </div>
+        </div>
+        <div class="d-flex page">
+         <div class="content front">
+          <h3 class="second_title">作 者</h3>
+           <div class="author d-flex">
+             <img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/%E5%AD%94%E5%AD%90%E8%81%96%E8%B9%9F%E5%9C%96.png/200px-%E5%AD%94%E5%AD%90%E8%81%96%E8%B9%9F%E5%9C%96.png">
+             <div class="author_content py-2">
+               <div class="author_intro">孔丘（前551年9月28日[註 1][1]－前479年4月11日[2]），子姓，孔氏，名丘[註 2]，字仲尼，後代敬稱孔子或孔夫子，生於魯國陬邑，祖先為宋國貴族，即殷商遺族後代，東周春秋末期魯國的教育家與哲學家，曾在魯國擔任官府要職，離開魯國後週遊列國十四年，最終魯哀公將其迎回魯國，賜封國老，稱「尼父」。</div>
+             </div>
+           </div>
+           
+           <h3 class="second_title">生 平</h3>
+           <div class="author_content">
+             孔子為魯國人，遠祖是殷商王室，武王克殷後，他的祖先分封到宋國。
+    
+    其十六世祖是殷商帝乙，十五世祖為宋國第二任國君宋公仲，十二世祖是宋前閔公，十一世祖弗父何讓位給弟宋厲公，拜為宋國上卿。七世祖孔父嘉是宋國大夫，曾為大司馬，在宮廷內亂中被殺，孔父嘉子木金父避災逃到魯國的陬邑定居，作魯國的大夫。
+    
+    孔子的父親叔梁紇居於魯昌平鄉陬邑，為陬邑大夫。叔梁紇與原配施氏連出九個女兒，他望子心切，於是續娶一妾，得一子名孟皮，卻腳有殘疾。叔梁紇在七十二歲時三度娶妻，娶了十八歲的顏徵在[來源請求]，由於婚姻不合禮制，被史書稱為野合，約在魯襄公廿二年（公元前551年）生下孔丘。顏徵在曾私下至尼丘山祭祀尼丘山神以求子，故取名丘，字仲尼。 
+           </div>
+        </div>
+        <div class="back"></div>
+      </div>
+        <div class="d-flex page cover_page">
+          <div class="cover w-100"></div>
+          <div class="shadow"></div>
+        </div>
+        <div class="page_gradient"></div>
+    </div>
+        <!--
+    <div class="bookmark">
+      <a class="prev"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+      </a>
+    </div>
+    -->
+      </div>
+    </div>
+    <div style="font-size:20px;text-align: center;padding:10px;">資料來源(Reference): <a href="https://zh.m.wikipedia.org/zh-tw/徐志摩">https://zh.m.wikipedia.org/zh-tw/徐志摩</a>
+      <a href="https://zh.m.wikipedia.org/zh-tw/徐志摩">https://zh.m.wikipedia.org/zh-tw/孔子</a>
+    </div>
+</body>
+   <script src="Assets/javascript/jquery.min.js"></script>
+   <script src="Assets/javascript/book.js"></script>
+   <script src="Assets/javascript/painting.js"></script>
+</html>
