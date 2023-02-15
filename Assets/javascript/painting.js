@@ -31,7 +31,7 @@ window.onload = function(e){
    }
 
 
-   var modes = document.querySelectorAll("nav button");
+   var modes = document.querySelectorAll("nav .mode");
    modes.forEach(function(mode) {
     mode.addEventListener("click", function() {
        modes.forEach(function(el) {
@@ -48,7 +48,7 @@ window.onload = function(e){
        }
      });
    });
-   
+
 PaintLayerButton.addEventListener("click", function() {
     isPaintingBehind = !isPaintingBehind;
     this.innerHTML = isPaintingBehind ? '<i class="fa fa-sort-amount-desc" aria-hidden="true"></i>' : '<i class="fa fa-sort-amount-desc" style="transform:rotateX(180deg)" aria-hidden="true"></i>';
