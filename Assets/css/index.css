@@ -1,0 +1,429 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif+TC&subset=chinese-traditional);
+
+body,html{
+  height:100%;
+}
+body{
+  min-width:35cm;
+  background-color:#eeeeee;
+}
+nav{
+  position:fixed;
+  display: flex;
+  z-index: 4;
+  padding:10px;
+}
+nav .btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right:10px;
+}
+.btn.active{
+  color:#ffffff;
+  background-color:#3e6393;
+}
+.btn.active svg path{
+  fill:#ffffff;
+}
+.table-of-contents{
+  display:flex;
+  margin-top:30px;
+  position:relative;
+  top:1rem;
+  width:29.8cm;
+  justify-content: end;
+  flex-direction: row-reverse;
+}
+.table-of-contents a{
+  position:relative;
+  display:block;
+  top:0;
+  right:20px;
+  writing-mode: vertical-rl;
+  padding:25px 6px;
+  margin:0 4px;
+  color:#fff;
+  text-decoration:none;
+  border-radius:10px 10px 0 0;
+  transition:0.5s all ;
+  filter: drop-shadow(3px 3px 4px rgba(0,0,0,0.35));
+}
+.table-of-contents a::before{
+  position:absolute;
+  width:100%;
+  height:100%;
+  content:"";
+  top:0;
+  left:0;
+  background-color:#2b7ce3;
+  border-radius:10px 10px 0 0;
+  -webkit-mask-image: radial-gradient( circle 4px at calc(50% - 0px) calc(0% + 12px), transparent 4px, #000 0);
+  z-index:-1;
+}
+.table-of-contents a:hover{
+  top:-6px;
+}
+.book{
+  perspective: 1500px;
+  z-index:2;
+  width: 29.6cm;
+  height: 21cm;
+  counter-reset:num_even -1 num_odd 0;
+}
+.book::before {
+  position: absolute;
+  content: "國中課本";
+  font-family: 'Noto Serif TC', serif;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-size: 7rem;
+  letter-spacing: 4rem;
+  padding-left: 7rem;
+}
+
+/* 書shadow */
+.book .cover_page .shadow::after{
+  z-index: -2;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 96%;
+  top: 0;
+  background: #999;
+  -webkit-box-shadow: 18px 40px 15px #8c8c8c96;
+  -moz-box-shadow: 18px 40px 15px #8c8c8c96;
+  box-shadow: 18px 40px 15px #8c8c8c96;
+  transition:0.5s all;
+}
+.book.open .cover_page .shadow::after{
+  top: 80%;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+  box-shadow: -6px 40px 10px #09090966;
+  left: auto;
+  right: 0.1cm;
+}
+
+.page{
+  position:absolute;
+  font-family:標楷體;
+  height:21cm;
+  width:14.8cm;
+  border:1px solid #c1c1c1;
+  background-color:white;
+  flex-direction: column-reverse;
+  -webkit-writing-mode: vertical-lr;
+  writing-mode: vertical-lr;
+  transform-style: preserve-3d;
+  z-index:0;
+}
+.cover{
+  position:relative;
+  background-color:#ffffff;
+  
+}
+.book .cover::before,.book .cover::after{
+   position:absolute;
+  content:"";
+  width:100%;
+  height:100%;
+  transition:.5s all;
+  left:0;
+  z-index: -1;
+  border-left: 18px solid #9b9b9b;
+}
+.book.open .cover::before{
+  left: -18px;
+  transform: rotateX(10deg);
+}
+ .book.open .cover::after{
+   left: -10px;
+  transform: rotateX(-8deg);
+  border-left: 10px solid #ffffff;
+}
+/** 翻過的下一個page比其他都高 =  1 **/
+.book .page:first-child{
+  z-index:3;
+}
+.page.flip_done + .page:not(.flip_done){
+  z-index:2;
+}
+.page.active{
+  z-index:100 !important;
+}
+.flip_done{
+  z-index:3;
+  pointer-events: none;
+}
+.last_flip_page{
+  z-index:4;
+  pointer-events: auto;
+}
+/* page gradient */
+.page_gradient::before,.page_gradient::after{
+  content:"";
+  position:absolute;
+  width:50%;
+  height:100%;
+  top:0;
+  left:0;
+  z-index:101;
+  pointer-events: none;
+  transition:.5s all;
+  opacity:0;
+}
+.book.open .page_gradient::before{
+  opacity:1;
+  background: linear-gradient(to right, #ffffff00 93%, #dddddd 100%);
+}
+.page_gradient::after{
+  left:unset;
+  right:0;
+}
+.book.open .page_gradient::after{
+  opacity:1;
+  background: linear-gradient(to left, #ffffff00 97.5%, #bbbbbb 100%);
+}
+
+/** 翻頁定位 **/
+.page{
+  transform-origin: right center;
+  transition: all 1s;
+}
+/* 頁碼 */
+.page .front::after,.page .back::after{
+  position:absolute;
+  writing-mode:horizontal-tb;
+  left:15px;
+  bottom:10px;
+  font-size:12px;
+  color:#444444;
+}
+.page .front::after{
+  counter-increment:num_even 2; 
+  content:counter(num_even);
+}
+.page .back::after{
+  counter-increment:num_odd 2; 
+  content:counter(num_odd);
+    left:unset;
+  right:15px;
+}
+.content{
+  display: flex;
+  flex-direction: column-reverse;
+  padding:1cm 0.5cm;
+  overflow:hidden;
+}
+.front{
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+.back{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color:#ffffff;
+  transform: rotateY(180deg);
+}
+.content-img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-repeat:no-repeat;
+  background-size:cover;
+  z-index:0;
+  top:0;
+  right:0;
+  filter: blur(4px);
+}
+.article{
+  position:relative;
+  display: flex;
+  flex-direction: column-reverse;
+  font-size:20px;
+  margin-right:10px;
+}
+.article.poem{
+  letter-spacing: 4px;
+}
+.article.poem > div{
+  padding-left: 10px;
+}
+.author{
+  align-items: flex-end;
+}
+.author img{
+  max-height:250px;
+  max-width:150px;
+  object-fit:cover;
+}
+.author_content{
+  display:flex;
+  flex-direction: column-reverse;
+  writing-mode: vertical-rl;
+  font-family:微軟正黑體;
+}
+.title{
+  position:relative;
+  font-family: 'Noto Serif TC', serif;
+}
+.second_title{
+  display: flex;
+  position:relative;
+  padding-top:10px;
+  font-size:22px;
+  background: linear-gradient(to top, #fff 1%, #d7ffbb 30%);
+  height: 120px;
+}
+
+.right_page:target{
+  transform: rotateY(-180deg); 
+  z-index:2;
+}
+.left_page:target{ 
+  transform: rotateY(180deg); 
+  z-index:2;
+}
+.bookmark a{
+  position:relative;
+  z-index:0;
+  padding:20px 15px;
+  color: #ffffff;
+}
+.bookmark a{
+  font-size:30px;
+}
+.bookmark a.next{
+  left:0;
+  background: linear-gradient(to right, #cccccc 80%, #aaaaaa 100%);
+  box-shadow: 8px 9px 12px rgba(0,0,0,0.35);
+}
+.bookmark a.prev{
+  right:0;
+  background: linear-gradient(to left, #cccccc 80%, #aaaaaa 100%);
+  box-shadow: -8px 9px 12px rgba(0,0,0,0.35);
+}
+.flip_done{
+  transform: rotateY(180deg);
+}
+
+/**********   canvas painting    *************/
+#canvas-content{
+  width:100%;
+  height:100vh;
+  position:absolute;
+  z-index: 3;
+}
+#canvas-content.active{
+  display:block !important;
+}
+.brush_tool{
+  position:absolute;
+  bottom: 15px;
+  left:10px;
+  background-color:#e8e8f9f0;
+  border-radius:4px;
+}
+.setting_title{
+  padding: 2px;
+  background-color: #becbe6;
+  text-align: center;
+  font-size: 0.8rem;
+}
+#brushSize,#brushColor,#brushStyle,#else_tool{
+  margin:6px 0;
+}
+
+brush-size, brush-style{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  padding:4px 10px;
+  cursor: pointer;
+  background-color:#f6f6f6;
+  transition: background-color 0.2s;
+}
+
+brush-size:hover {
+  background-color: lightgray;
+}
+
+brush-size.selected ,brush-style.selected{
+  background-color: #bd2e2e;
+  color: white;
+}
+brush-style.selected div{
+  background-color:#f6f6f6;
+}
+brush-style div{
+  width: 10px;
+  height: 10px;
+  background-color: #444444;
+  border-radius: 5px;
+  margin-right: 4px;
+}
+brush-style .square{
+  border-radius:0;
+}
+brush-style .butt{
+  border-radius:0;
+  height:5px;
+}
+#brushColor{
+  padding:0;
+  margin:0;
+  list-style-type:none;
+  display:flex;
+  background-color: #f6f6f6;
+}
+#brushColor li{
+  width:26px;
+  height:26px;
+  margin:4px 6px;
+  border-radius:4px;
+  background-color:#f6f6f6;
+  cursor: pointer;
+}
+#brushColor li.selected{
+  border: 2px solid #fff;
+  outline: 1px solid black;
+}
+#else_tool{
+  background-color:#f6f6f6;
+  display:flex;
+}
+#else_tool button{
+  width:100%;
+  position:relative;
+}
+/* styles for the tooltip */
+[title]:hover:after {
+  content: attr(title);
+  width: max-content;
+  padding: 4px 8px;
+  position: absolute;
+  left: calc(50% - 24px);
+  top: 100%;
+  background-color: black;
+  color: #f6f6f6;
+  border-radius: 4px;
+}
